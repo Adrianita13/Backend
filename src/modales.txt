@@ -1,0 +1,143 @@
+
+        {/* <Modal isOpen={modalEditar}>
+          <ModalHeader>
+            <div>
+              <h3>Editar Paciente</h3>
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <div className="form-group">
+              <label>ID</label>
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                name="id"
+                value={pacienteSeleccionado && pacienteSeleccionado.id}
+              />
+              <br />
+
+              <label>Paciente</label>
+              <input
+                className="form-control"
+                type="text"
+                name="nombre"
+                value={pacienteSeleccionado && pacienteSeleccionado.nombre}
+                onChange={handleChange}
+              />
+              <br />
+
+              <label>Apellido</label>
+              <input
+                className="form-control"
+                type="text"
+                name="apellido"
+                value={pacienteSeleccionado && pacienteSeleccionado.apellido}
+                onChange={handleChange}
+              />
+              <br />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-primary" onClick={() => editar()}>
+              Actualizar
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => setModalEditar(false)}
+            >
+              Cancelar
+            </button>
+          </ModalFooter>
+        </Modal>
+
+
+        <Modal isOpen={modalEliminar}>
+          <ModalBody>
+            Estás Seguro que deseas eliminar el paciente {pacienteSeleccionado && pacienteSeleccionado.nombre}
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-danger" onClick={() => eliminar()}>
+              Sí
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setModalEliminar(false)}
+            >
+              No
+            </button>
+          </ModalFooter>
+        </Modal>
+
+
+        <Modal isOpen={modalInsertar}>
+          <ModalHeader>
+            <div>
+              <h3>Insertar Paciente</h3>
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <div className="form-group">
+              <label>ID</label>
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                name="id"
+                value={data[data.length - 1].id + 1}
+              />
+              <br />
+
+              <label>Nombre</label>
+              <input
+                className="form-control"
+                type="text"
+                name="nombre"
+                value={pacienteSeleccionado ? pacienteSeleccionado.nombre : ''}
+                onChange={handleChange}
+              />
+              <br />
+
+              <label>Apellido</label>
+              <input
+                className="form-control"
+                type="text"
+                name="apellido"
+                value={pacienteSeleccionado ? pacienteSeleccionado.apellido : ''}
+                onChange={handleChange}
+              />
+              <label>DNI</label>
+              <input
+                className="form-control"
+                type="text"
+                name="dni"
+                value={pacienteSeleccionado ? pacienteSeleccionado.dni : ''}
+                onChange={handleChange}
+              />
+              <label>fechaIngreso</label>
+              <input
+                className="form-control"
+                type="text"
+                name="fechaIngreso"
+                value={pacienteSeleccionado ? pacienteSeleccionado.fechaIngreso : ''}
+                onChange={handleChange}
+              />
+
+              <br />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-primary"
+              onClick={() => altaPaciente()}>
+              Insertar
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => setModalInsertar(false)}
+            >
+              Cancelar
+            </button>
+          </ModalFooter>
+        </Modal>
+      </div>
+      ); */}
