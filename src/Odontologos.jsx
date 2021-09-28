@@ -1,4 +1,4 @@
-// // import logo from './logo.svg';
+// import logo from './logo.svg';
 // import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
@@ -8,282 +8,404 @@
 
 // function Odontologos() {
 
-//     const service = new Service();
+//   const service = new Service();
+  
+//   const [data, setData] = useState([]);
+//   const [modalEditar, setModalEditar] = useState(false);
+//   const [modalEliminar, setModalEliminar] = useState(false);
+//   const [modalInsertar, setModalInsertar] = useState(false);
+//   const [modalBuscarPorId, setModalBuscarPorId] = useState(false);
 
-//     const [data, setData] = useState([]);
-//     const [modalEditar, setModalEditar] = useState(false);
-//     const [modalEliminar, setModalEliminar] = useState(false);
-//     const [modalInsertar, setModalInsertar] = useState(false);
-//     const [modalBuscarPorId, setModalBuscarPorId] = useState(false);
 
+//   async function fetchData(){
+//     const datosAPI = await service.get("/odontologos");
+  
+//     setData(datosAPI);
+//   }
+//   useEffect(() => {
+   
+//     fetchData();
+//     },[])
 
-//     useEffect(() => {
-//         async function fetchData() {
-//             const data = await service.get("/odontologos");
-//             setData(data);
-//         }
-//         fetchData();
-//     }, [])
+//   const [odontologoSeleccionado, setOdontologoSeleccionado] = useState({
+//     id: '',
+//     nombre: '',
+//     apellido: '',
+//     matricula: '',
+//     
 
-//     const [odontologoSeleccionado, setOdontologoSeleccionado] = useState({
-//         id: '',
-//         nombre: '',
-//         apellido: '',
-//         matricula: ''
+//   });
 
-//     });
+//   const seleccionarOdontologo = (elemento, accion) => {
+//     setOdontologoSeleccionado(elemento);
+//     switch(accion) {
+//       case "Editar": setModalEditar(true)
+//       break;
+//       case "Eliminar": setModalEliminar(true)
+//       break;
+//       case "Ver Domicilio": setModalVerDomicilio(true)
+//       break;
 
-//     const seleccionarOdontologo = (elemento, accion) => {
-//         setOdontologoSeleccionado(elemento);
-//         (accion === 'Editar') ? setModalEditar(true) : setModalEliminar(true)
-//     }
-
-//     const handleChange = e => {
-//         const { name, value } = e.target;
-//         setOdontologoSeleccionado((prevState) => ({
-//             ...prevState,
-//             [name]: value
-//         }));
-//     }
-
-//     const editar = async () => {
-//         const data = await service.put(odontologoSeleccionado, "/odontologos")
-//         setModalEditar(false);
-//         window.location.reload();
-//     }
-
-//     const eliminar = async () => {
-//         const data = await service.delete("/odontologos" + "/" + odontologoSeleccionado.id)
-//         setModalEliminar(false);
-//         window.location.reload();
-//     }
-
-//     const buscar = async () => {
-//         const data = await service.get("/odontologos" + "/" + odontologoSeleccionado.id)
-//         setModalBuscarPorId(false);
-//         Swal.fire(data)
+//       default: break;
 
 //     }
+    
+//   }
 
-//     const abrirModalBuscarPorId = () => {
-//         setOdontologoSeleccionado(null);
-//         setModalBuscarPorId(true);
+//   const handleChange = e => {
+//     const { name, value } = e.target;
+//     setOdontologoSeleccionado((prevState) => ({
+//       ...prevState,
+//       [name]: value
+//     }));
+//   }
 
+//   const editar = async () => {
+//     const datosOdontologo = await service.put(odontologoSeleccionado, "/odontologos")
+//     setModalEditar(false);
+   
+//   }
+
+//   const eliminar = async () => {
+//     const datosOdontologo = await service.delete("/odontologos" + "/" + odontologoSeleccionado.id)
+//     setModalEliminar(false);
+//     fetchData()
+   
+//   }
+
+//   const buscar = async () => {
+//     const datosOdontologo = await service.get("/odontologos" + "/" + pacienteSeleccionado.id)
+//     if(typeof datosPacientes== "object") {
+//       setModalBuscarPorId(false);
+//       setData([datosPacientes])
+     
 //     }
+  
+    
+//   }
 
-//     const abrirModalAltaOdontologo = () => {
-//         setOdontologoSeleccionado(null);
-//         setModalInsertar(true);
+//   const abrirModalBuscarPorId = () => {
+//     setPacienteSeleccionado(null);
+//     setModalBuscarPorId(true);
+  
+//   }
 
-//     }
+//   const abrirModalAltaPaciente = () => {
+//     setPacienteSeleccionado(null);
+//     setModalInsertar(true);
+//     fetchData()
+//   }
 
-
-//     const altaOdontologo = async () => {
-
-//         const data = await service.post(odontologoSeleccionado, "/odontologos")
-//         setModalInsertar(false);
-//         Swal.fire("Odontólogo agregado exitosamente")
-
-//     }
-
-
-//     return (
-
-//         <div className="App">
-
-//             <h2> ODONTOLOGOS </h2>
-//             <br />
-//             <button className="btn btn-success" onClick={() => abrirModalAltaOdontologo()}>Insertar</button>
-//             <br /><br />
-//             <button className="btn btn-success" onClick={() => abrirModalBuscarPorId()}>Buscar un odontólogo</button>
-//             <br /><br />
-//             <table className="table table-bordered">
-//                 <thead>
-//                     <tr>
-//                         <th>ID</th>
-//                         <th>Nombre</th>
-//                         <th>Apellido</th>
-//                         <th>Matricula</th>
+  
+//   const altaPaciente = async() => {
+//     const {nombre, apellido, dni, fechaIngreso, calle, numero, localidad, provincia} = pacienteSeleccionado;
+//     const pacienteNuevo= {nombre, apellido, dni, fechaIngreso, domicilio : {calle, numero, localidad, provincia}};
+//    const datosPacientes = await service.post(pacienteNuevo, "/pacientes")
+//     setModalInsertar(false);
+//     Swal.fire("Paciente agregado exitosamente")
+ 
+//   }
 
 
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {data.map((odontologo, index) => (
-//                         <tr key={index}>
-//                             <td>{odontologo.id}</td>
-//                             <td>{odontologo.nombre}</td>
-//                             <td>{odontologo.apellido}</td>
-//                             <td>{odontologo.matricula}</td>
+//   return (
 
-//                             <td><button className="btn btn-primary" onClick={() => seleccionarOdontologo(odontologo, 'Editar')}>Editar</button> {"   "}
-//                                 <button className="btn btn-danger" onClick={() => seleccionarOdontologo(odontologo, 'Eliminar')}>Eliminar</button></td>
-//                         </tr>
-//                     ))
-//                     }
-//                 </tbody>
-//             </table>
+//       <div className="App">
+        
+//         <h2> PACIENTES </h2>
+//         <br />
+//         <button className="btn btn-success" onClick={() => abrirModalAltaPaciente()}>Insertar</button>
+//         {"               "}
+//         <button className="btn btn-success" onClick={() => abrirModalBuscarPorId()}>Buscar un paciente</button>
+//         {"               "}
+//         <button className="btn btn-success" onClick={() => fetchData()}> Buscar todos los pacientes </button>
+//         <br />
+//         <br />
+//         <br />
+//         <table className="table table-bordered">
+//           <thead>
+//             <tr>
+//               <th>ID</th>
+//               <th>Nombre</th>
+//               <th>Apellido</th>
+//               <th>DNI</th>
+//               <th>FechaIngreso</th>
+//               <th>Domicilio</th>
 
-//             <Modal isOpen={modalEditar}>
-//                 <ModalHeader>
-//                     <div>
-//                         <h3>Editar Odontólogo</h3>
-//                     </div>
-//                 </ModalHeader>
-//                 <ModalBody>
-//                     <div className="form-group">
-//                         <label>ID</label>
-//                         <input
-//                             className="form-control"
-//                             readOnly
-//                             type="text"
-//                             name="id"
-//                             value={odontologoSeleccionado && odontologoSeleccionado.id}
-//                         />
-//                         <br />
-
-//                         <label>Odontólogo</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="nombre"
-//                             value={odontologoSeleccionado && odontologoSeleccionado.nombre}
-//                             onChange={handleChange}
-//                         />
-//                         <br />
-
-//                         <label>Apellido</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="apellido"
-//                             value={odontologoSeleccionado && odontologoSeleccionado.apellido}
-//                             onChange={handleChange}
-//                         />
-//                         <label>Matrícula</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="matricula"
-//                             value={odontologoSeleccionado && odontologoSeleccionado.matricula}
-//                             onChange={handleChange}
-//                         />
-//                         <br />
-//                     </div>
-//                 </ModalBody>
-//                 <ModalFooter>
-//                     <button className="btn btn-primary" onClick={() => editar()}>
-//                         Actualizar
-//                     </button>
-//                     <button
-//                         className="btn btn-danger"
-//                         onClick={() => setModalEditar(false)}
-//                     >
-//                         Cancelar
-//                     </button>
-//                 </ModalFooter>
-//             </Modal>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {data.map((paciente, index) => (
+//               <tr key= {index}>
+//                 <td>{paciente.id}</td>
+//                 <td>{paciente.nombre}</td>
+//                 <td>{paciente.apellido}</td>
+//                 <td>{paciente.dni}</td>
+//                 <td>{paciente.fechaIngreso}</td>
+//                 <td> <button className="btn btn-primary" onClick={() => seleccionarPaciente(paciente.domicilio, 'Ver Domicilio')}>Ver Domicilio</button> </td>
+//                 <td><button className="btn btn-primary" onClick={() => seleccionarPaciente(paciente, 'Editar')}>Editar</button> {"   "}
+//                   <button className="btn btn-danger" onClick={() => seleccionarPaciente(paciente, 'Eliminar')}>Eliminar</button></td>
+//               </tr>
+//             ))
+//             }
+//           </tbody>
+//         </table>
 
 
-//             <Modal isOpen={modalEliminar}>
-//                 <ModalBody>
-//                     Estás Seguro que deseas eliminar el odontólogo {odontologoSeleccionado && odontologoSeleccionado.nombre}
-//                 </ModalBody>
-//                 <ModalFooter>
-//                     <button className="btn btn-danger" onClick={() => eliminar()}>
-//                         Sí
-//                     </button>
-//                     <button
-//                         className="btn btn-secondary"
-//                         onClick={() => setModalEliminar(false)}
-//                     >
-//                         No
-//                     </button>
-//                 </ModalFooter>
-//             </Modal>
+//         <Modal isOpen={modalVerDomicilio}>
+//           <ModalHeader>
+//             <div>
+//               <h3>Ver Domicilio</h3>
+//             </div>
+//           </ModalHeader>
+//           <ModalBody>
+//             <div className="form-group">
+//               <label>Calle</label>
+//               <input
+//                 className="form-control"
 
-//             <Modal isOpen={modalBuscarPorId}>
-//                 <ModalBody>
-//                     Ingresa el id del odontólogo buscado
+//                 type="text"
+//                 name="Calle"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.calle}
+//               />
+//               <br />
 
-//                     <label>ID</label>
-//                     <input
-//                         className="form-control"
-//                         type="text"
-//                         name="id"
-//                         value={odontologoSeleccionado && odontologoSeleccionado.id}
-//                         onChange={handleChange}
-//                     />
+//               <label>Numero</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="Numero"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.numero}
+//                 onChange={handleChange}
+//               />
+//               <br />
 
-//                 </ModalBody>
-//                 <ModalFooter>
-//                     <button className="btn btn-danger" onClick={() => buscar()}>
-//                         Buscar
-//                     </button>
-//                     <button
-//                         className="btn btn-secondary"
-//                         onClick={() => setModalBuscarPorId(false)}
-//                     >
-//                         Cancelar
-//                     </button>
-//                 </ModalFooter>
-//             </Modal>
+//               <label>Localidad</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="Localidad"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.localidad}
+//                 onChange={handleChange}
+//               />
+//               <br />
+//               <label>Provincia</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="Provincia"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.provincia}
+//                 onChange={handleChange}
+//               />
+//               <br />
+//             </div>
+//           </ModalBody>
+//           <ModalFooter>
+//             <button
+//               className="btn btn-danger"
+//               onClick={() => setModalVerDomicilio(false)}
+//             >
+//               Ok
+//             </button>
+//           </ModalFooter>
+//         </Modal>
 
 
-//             <Modal isOpen={modalInsertar}>
-//                 <ModalHeader>
-//                     <div>
-//                         <h3>Insertar Odontólogo</h3>
-//                     </div>
-//                 </ModalHeader>
-//                 <ModalBody>
-//                     <div className="form-group">
+//         <Modal isOpen={modalEditar}>
+//           <ModalHeader>
+//             <div>
+//               <h3>Editar Paciente</h3>
+//             </div>
+//           </ModalHeader>
+//           <ModalBody>
+//             <div className="form-group">
+//               <label>ID</label>
+//               <input
+//                 className="form-control"
+//                 readOnly
+//                 type="text"
+//                 name="id"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.id}
+//               />
+//               <br />
 
-//                         <label>Nombre</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="nombre"
-//                             value={odontologoSeleccionado ? odontologoSeleccionado.nombre : ''}
-//                             onChange={handleChange}
-//                         />
-//                         <br />
+//               <label>Paciente</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="nombre"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.nombre}
+//                 onChange={handleChange}
+//               />
+//               <br />
 
-//                         <label>Apellido</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="apellido"
-//                             value={odontologoSeleccionado ? odontologoSeleccionado.apellido : ''}
-//                             onChange={handleChange}
-//                         />
-//                         <label>DNI</label>
-//                         <input
-//                             className="form-control"
-//                             type="text"
-//                             name="matricula"
-//                             value={odontologoSeleccionado ? odontologoSeleccionado.matricula : ''}
-//                             onChange={handleChange}
-//                         />
-//                         </div>
-//                         </ModalBody>
+//               <label>Apellido</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="apellido"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.apellido}
+//                 onChange={handleChange}
+//               />
+//               <br />
+//             </div>
+//           </ModalBody>
+//           <ModalFooter>
+//             <button className="btn btn-primary" onClick={() => editar()}>
+//               Actualizar
+//             </button>
+//             <button
+//               className="btn btn-danger"
+//               onClick={() => setModalEditar(false)}
+//             >
+//               Cancelar
+//             </button>
+//           </ModalFooter>
+//         </Modal>
 
-//                         <ModalFooter>
-//                             <button className="btn btn-primary"
-//                                 onClick={() => altaOdontologo()}>
-//                                 Insertar
-//                             </button>
-//                             <button
-//                                 className="btn btn-danger"
-//                                 onClick={() => setModalInsertar(false)}
-//                             >
-//                                 Cancelar
-//                             </button>
-//                         </ModalFooter>
-//                     </Modal>
-//                 </div>
 
-//                 );
+//         <Modal isOpen={modalEliminar}>
+//           <ModalBody>
+//             Estás Seguro que deseas eliminar el paciente {pacienteSeleccionado && pacienteSeleccionado.nombre}
+//           </ModalBody>
+//           <ModalFooter>
+//             <button className="btn btn-danger" onClick={() => eliminar()}>
+//               Sí
+//             </button>
+//             <button
+//               className="btn btn-secondary"
+//               onClick={() => setModalEliminar(false)}
+//             >
+//               No
+//             </button>
+//           </ModalFooter>
+//         </Modal>
+
+//         <Modal isOpen={modalBuscarPorId}>
+//           <ModalBody>
+//             Ingresa el id del paciente buscado
+
+//             <label>ID</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="id"
+//                 value={pacienteSeleccionado && pacienteSeleccionado.id}
+//                 onChange={handleChange}
+//               />
+
+//           </ModalBody>
+//           <ModalFooter>
+//             <button className="btn btn-danger" onClick={() => buscar()}>
+//               Buscar
+//             </button>
+//             <button
+//               className="btn btn-secondary"
+//               onClick={() => setModalBuscarPorId(false)}
+//             >
+//               Cancelar
+//             </button>
+//           </ModalFooter>
+//         </Modal>
+
+
+//         <Modal isOpen={modalInsertar}>
+//           <ModalHeader>
+//             <div>
+//               <h3>Insertar Paciente</h3>
+//             </div>
+//           </ModalHeader>
+//           <ModalBody>
+//             <div className="form-group">
+             
+//               <label>Nombre</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="nombre"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.nombre : ''}
+//                 onChange={handleChange}
+//               />
+//               <br />
+
+//               <label>Apellido</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="apellido"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.apellido : ''}
+//                 onChange={handleChange}
+//               />
+//               <label>DNI</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="dni"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.dni : ''}
+//                 onChange={handleChange}
+//               />
+//               <label>fechaIngreso</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="fechaIngreso"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.fechaIngreso : ''}
+//                 onChange={handleChange}
+//               />
+//               <br/>
+//               <hr/>
+//               <p> Domicilio </p>
+              
+//               <label>Calle</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="calle"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.calle : ''}
+//                 onChange={handleChange}
+//               />
+//                <label>Numero</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="numero"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.numero : ''}
+//                 onChange={handleChange}
+//               />
+
+//               <label>Localidad</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="localidad"
+//                 value={odontologoSeleccionado ? odontologoSeleccionado.localidad : ''}
+//                 onChange={handleChange}
+//               />    
+//                 <label>Provincia</label>
+//               <input
+//                 className="form-control"
+//                 type="text"
+//                 name="provincia"
+//                 value={pacienteSeleccionado ? pacienteSeleccionado.provincia : ''}
+//                 onChange={handleChange}
+//               />    
+//               <br />
+//             </div>
+//           </ModalBody>
+//           <ModalFooter>
+//             <button className="btn btn-primary"
+//               onClick={() => altaPaciente()}>
+//               Insertar
+//             </button>
+//             <button
+//               className="btn btn-danger"
+//               onClick={() => setModalInsertar(false)}
+//             >
+//               Cancelar
+//             </button>
+//           </ModalFooter>
+//         </Modal>
+//       </div>
+//       );
 // }
 
-//                 export default Odontologos;
+// export default Odontologos;
