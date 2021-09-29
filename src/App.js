@@ -16,8 +16,8 @@ export default function App() {
     <BrowserRouter>
     <Switch>
     <Route exact path= "/"> <Clinica/> </Route>
-    <Route path= "/paciente"> <Pacientes/> </Route>
-    <Route path= "/odontologo"> <Odontologos/> </Route>
+    <Route path="/paciente"> <Pacientes /> </Route>
+    <Route path="/odontologo"> <Odontologos /> </Route>
     </Switch>
     </BrowserRouter>
   )
